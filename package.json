@@ -1,0 +1,36 @@
+{
+  "name": "fcc-book-trading-club",
+  "version": "1.0.0",
+  "description": "Freecodecamp Challenge",
+  "main": "app.js",
+  "scripts": {
+    "test": "mocha",
+    "start": "node app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/naprirfan/fcc-book-trading-club.git"
+  },
+  "keywords": [
+    "fullstack",
+    "JS"
+  ],
+  "author": "Muhammad Irfan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/naprirfan/fcc-book-trading-club/issues"
+  },
+  "homepage": "https://github.com/naprirfan/fcc-book-trading-club#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-http": "^2.0.1",
+    "mocha": "^2.5.3"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.1",
+    "chai-json-schema": "^1.2.0",
+    "dotenv": "^2.0.0",
+    "express": "^4.13.4",
+    "request": "^2.72.0"
+  }
+}
