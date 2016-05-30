@@ -100,15 +100,28 @@ describe('BOOK API', function(done){
 			})
 	});
 
+	//works well with postman, but not here. I'm confused
 	xit('should return status ok when adding book to collection', function(done){
 		this.timeout(20000);
 		chai.request(server)
 			.post('/book/add')
-			.field('data', JSON.stringify(bookItem))
+			.field('data', bookItem)
 			.end(function(err,res){
 				expect(res).to.have.status(200);
 				expect(res).to.be.json;
 				done();
 			});
 	});
+
+	it('should return status ok when deleting book from collection', function(done){
+		this.timeout(20000);
+		chai.request(server)
+			.delete('/book/delete')
+			.field('id', "9823749237498234")
+			.end(function(err, res){
+				expect(res).to.have.status(200);
+				expect(res).to.be.json;
+				done();
+			})
+	})
 });

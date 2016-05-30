@@ -64,7 +64,25 @@ app.post('/book/add', function(req,res){
 		    }
 		);
 	});
-})
+});
+
+app.delete('/book/delete', function(req,res){
+	var id = req.body.id;
+
+	mongodbclient.connect(db_url, function(err,db){
+		if (err) throw err;
+
+		var collection = db.collection('fcc-bookjump-books');
+		collection.remove(
+			{_id: id},
+			{},
+			function(err, doc) {
+				res.status(200).json(doc);
+				res.end();
+			}
+		);
+	})
+});
 
 app.listen(process.env.PORT || 5000, function(err){
 	if (err) {
