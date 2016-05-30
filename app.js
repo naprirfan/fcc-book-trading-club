@@ -15,18 +15,16 @@ app.get('/', function(req,res){
 });
 
 app.get('/book/findAll', function(req,res){
-	var result = [
-		{
-			title : "blah",
-			author: "blah",
-			description: "blah"
-		},
-		{
-			title : "blah",
-			author: "blah"
-		}
-	];
-	res.status(200).json(result);
+	mongodbclient.connect(db_url, function(err,db){
+
+		var collection = db.collection('fcc-bookjump-books');
+		collection.find().toArray(function(err,doc){
+			if (err) throw err;
+			res.status(200).json(doc);
+			res.end();
+		});
+	});
+	
 });
 
 app.get('/book/search/:query', function(req,res){

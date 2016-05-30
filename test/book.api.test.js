@@ -13,7 +13,7 @@ describe('BOOK API', function(done){
 		bookSchema = {
 			"title": "book schema",
 			"type": "object",
-			"required": ['title', 'authors', 'description', 'subtitle'],
+			"required": ['title', 'authors', 'description'],
 			"properties": {
 				"title": {
 					type: "string"
@@ -76,7 +76,7 @@ describe('BOOK API', function(done){
 		};
 	});
 
-	xit('should return JSON containing all books on /book/findAll', function(done){
+	it('should return JSON containing all books on /book/findAll', function(done){
 		this.timeout(20000);//set timeout to 20 second
 		chai.request(server)
 			.get('/book/findAll')
