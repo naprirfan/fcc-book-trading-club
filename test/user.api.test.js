@@ -30,6 +30,8 @@ describe('USER API', function(done){
 			.send(signupObj)
 			.end(function(err,res){
 				expect(res).to.have.status(200);
+				expect(res).to.be.json;
+				expect(res.body.token).to.be.ok;
 				done();
 			});
 	});
