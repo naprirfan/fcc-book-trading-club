@@ -35,7 +35,7 @@ describe('BOOK API', function(done){
 			}
 		};
 
-		bookItem =  {
+		bookItem = {"data": {
 			"title": "Abundance for What?",
 			"authors": [
 				"David Riesman"
@@ -73,7 +73,7 @@ describe('BOOK API', function(done){
 			"previewLink": "http://books.google.co.id/books?id=PJ3BAfhT72gC&printsec=frontcover&dq=abundance&hl=&cd=1&source=gbs_api",
 			"infoLink": "http://books.google.co.id/books?id=PJ3BAfhT72gC&dq=abundance&hl=&source=gbs_api",
 			"canonicalVolumeLink": "http://books.google.co.id/books/about/Abundance_for_What.html?hl=&id=PJ3BAfhT72gC"
-		};
+		}};
 	});
 
 	it('should return JSON containing all books on /book/findAll', function(done){
@@ -97,21 +97,32 @@ describe('BOOK API', function(done){
 				expect(res).to.be.json;
 				expect(res.body).to.be.jsonSchema(searchResultSchema);
 				done();
-			})
+			});
 	});
 
 	//works well with postman, but not here. I'm confused
-	xit('should return status ok when adding book to collection', function(done){
+	it('should return status ok when adding book to collection', function(done){
 		this.timeout(20000);
 		chai.request(server)
 			.post('/book/add')
-			.field('data', bookItem)
+			.send(bookItem)
 			.end(function(err,res){
 				expect(res).to.have.status(200);
 				expect(res).to.be.json;
 				done();
 			});
 	});
+
+	it('should throw error when adding book with bad data', function(done){
+		this.timeout(20000);
+		chai.request(server)
+			.post('/book/add')
+			.send({data: {title: "hello"}})
+			.end(function(err,res){
+				expect(res).to.have.status(400);
+				done();
+			});
+	})
 
 	it('should return status ok when deleting book from collection', function(done){
 		this.timeout(20000);
@@ -122,6 +133,6 @@ describe('BOOK API', function(done){
 				expect(res).to.have.status(200);
 				expect(res).to.be.json;
 				done();
-			})
+			});
 	})
 });
